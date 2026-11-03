@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.semka</groupId>
+    <artifactId>ThreeRacesThreePowers</artifactId>
+    <version>1.1</version>
+
+    <properties>
+        <minecraft.version>1.21.11</minecraft.version>
+        <paper.version>1.21.11-R0.1-SNAPSHOT</paper.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <repositories>
+        <!-- Основной репозиторий PaperMC -->
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <!-- <updatePolicy>always</updatePolicy> -->
+            </snapshots>
+        </repository>
+
+        <!-- Официальное зеркало для бесперебойной загрузки SNAPSHOT-версий -->
+        <repository>
+            <id>papermc-snapshots</id>
+            <url>https://papermc.io</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <!-- Репозиторий для загрузки Vault -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <!-- Репозиторий HelpChat для DeluxeMenus -->
+        <!-- <repository>
+            <id>helpchat-repo</id>
+            <url>https://extendedclip.com</url>
+        </repository> -->
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.helpch.at/releases/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>${paper.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>4.4.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Зависимость Vault API -->
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- вохможно, когда-нибудь... -->
+        <!-- <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.12.0</version>
+            <scope>provided</scope>
+        </dependency> -->
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName> <!-- Имя итогового .jar файла -->
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>${maven.compiler.target}</release>
+                </configuration>
+            </plugin>
+
+            <!-- Плагин для сборки .jar файла -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Главный класс плагина -->
+                            <mainClass>com.semka.threeraces.MainPlugin</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Плагин для автоматического копирования plugin.yml в .jar при сборке -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>plugin.yml</include>
+                                        <include>config.yml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <id>obfuscate</id>
+                        <configuration>
+                            <tasks>
+                                <property name="runtime_classpath" refid="maven.runtime.classpath"/>
+                                <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" classpath="${runtime_classpath}"/>
+                                <yguard>
+                                see the yGuard task documentation for information about the <yguard> element
+                                </yguard>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
+        </plugins>
+    </build>
+
+</project>

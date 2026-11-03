@@ -1,0 +1,30 @@
+# ThreeRacesThreePowers by Semka2012
+# Конфигурация плагина
+# Для цветов нужно использовать только legacy-коды (символ §)!
+
+messages:
+  # Сообщения плагина
+  # Плейсхолдеры: 
+  # - {player}   ник игрока
+  # - {race}     раса с форматированием
+  # - {racename} внутреннее мия расы
+  races:
+    titan: "§5Титан"
+    killer: "§4Убийца"
+    runner: "§2Раннер"
+  admin:
+    race-set: "§aРаса у игрока §b{player} §aбыла установлена на {race}"
+    race-unset: "§aРаса у игрока §b{player} §aбыла §2сброшена"
+  player:
+    race-set: "§aРаса выбрана: {race}"
+    error-race-already-set: "§cВы уже выбрали расу!"
+  
+  syntax-error: "§cОшибка! Проверье написание команды"
+  unknown-race: "§cНеизвестная раса: {racename}"
+
+hooks:
+  # Настройка зависимостей плагина
+  vault:
+    enabled: true
+  deluxemenus:
+    enabled: true

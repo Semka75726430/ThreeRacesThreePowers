@@ -1,0 +1,40 @@
+name: threeraces
+description: |
+  §6ThreeRacesThreePowers §eby Semka2012
+  §aДобавляет три расы:
+  §4Убийца,
+  §5Титан,
+  §2Раннер.
+  §aКаждая из них добавляет свои способности
+
+  §7 * Код под лицензией GNU General Public License v3.0 (GPLv3)
+version: 1.1
+api-version: '1.21.11'
+author: Semka2012
+prefix: "§dРасы"
+permissions:
+  threeraces.default:
+    default: true
+    description: "§aРазрешения игроков"
+  threeraces.admin:
+    default: op
+    description: "§dАдминские разрешения"
+  threeraces.changeafter:
+    default: false
+    description: "§eРазрешение на смену расы"
+commands:
+  race:
+    description: "§bВыбрать расу"
+    usage: "/race [титан|убийца|раннер]"
+    permission: threeraces.default
+    permission-message: "§cУ вас нет разрешения"
+    aliases: ['раса']
+  threeraces:
+    description: "§dАдмин команда §5(+gui)"
+    usage: |
+      "§e/threeraces [§6reload§e|§6player§e]"
+      "§e/threeraces player <name> [§6setrace [§9titan§6|§9killer§6|§9runner§6|§9none§6] §e| §6info§e]"
+    permission: threeraces.admin
+softdepend: 
+- DeluxeMenus
+- Vault
